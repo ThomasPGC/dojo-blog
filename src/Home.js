@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import BlogList from "./BlogList";
 import useFetch from "./useFetch";
 
@@ -7,7 +7,7 @@ const Home = () => {
     //let name = "Mario"
     const [name, setName] = useState('Mario');
 
-    const {data : blogs, isPending, error} = useFetch('http://localhost:8000/blogs');
+    const {data : blogs, isPending, error : erreur} = useFetch('http://localhost:8000/blogs');
 
 
     
@@ -29,7 +29,7 @@ const Home = () => {
     return ( 
         <div className="home">
             <h2>Page de base</h2>
-            {error && <div> {error} </div>}
+            {erreur && <div> {erreur} </div>}
             {isPending && <div> Loading... </div>}
             {blogs && <BlogList blogs = {blogs} title="Tous les posts" />}
             {/*<BlogList blogs = {blogs.filter((post) =>  post.author === 'mario' )} title="Posts à Mario"/>*/}
@@ -42,3 +42,6 @@ const Home = () => {
 }
  
 export default Home; 
+
+
+// npx json-server --watch data/db.json --port 8000
